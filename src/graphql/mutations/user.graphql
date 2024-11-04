@@ -1,0 +1,15 @@
+mutation postRegister (
+    $username: string,
+    $email: string,
+    $password: string,
+    $confirmPassword: string
+){
+    create_user(
+        username: $username,
+        email: $email,
+        password: $password,
+        confirmPassword: $confirmPassword  
+    ){
+        message
+    }
+}

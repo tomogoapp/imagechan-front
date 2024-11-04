@@ -1,0 +1,30 @@
+query getUser(
+  $username: String!, 
+  $password: String!
+) {
+  login_user(username: $username, password: $password) {
+    token
+    message
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+query getPosts {
+    posts {
+        id
+        title
+        content
+        anonPost
+        createdBy {
+            username
+            id
+        }
+        created_at
+        updated_at
+        deleted_at
+    }
+}

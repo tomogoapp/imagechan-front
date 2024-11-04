@@ -1,0 +1,16 @@
+
+query GetPosts {
+    posts {
+        id
+        title
+        content
+        anonPost
+        createdBy {
+            username
+            id
+        }
+        created_at
+        updated_at
+        deleted_at
+    }
+}
