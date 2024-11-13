@@ -31,6 +31,13 @@
     }
   })
 
+  const alertMessage = reactive({
+    show:false,
+    type:'',
+    message:'',
+
+  })
+
   const validationSchema = toTypedSchema(
     zod.object({
       username: zod.string({
@@ -62,8 +69,10 @@
       }
 
     }catch(error){
+      alertMessage.show = true
+      alertMessage.message = `${error}`
       console.log(error)
-      alert(error)
+      //alert(error)
     }
 
   })
@@ -77,6 +86,7 @@
 
 <template>
   <div>
+    <v-alert v-if='alertMessage.show' :text='alertMessage.message' type="error" class="mb-4"></v-alert>
     <v-form
       @submit.prevent = 'onSubmit'
     >
@@ -103,6 +113,8 @@
         Log In
       </VBtn>
     </v-form>
+
+    
   </div>
 </template>
 <style>

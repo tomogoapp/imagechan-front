@@ -1,6 +1,8 @@
 <template>
   <v-footer 
-    height="40" 
+    height="40"
+    order = '0'
+    color="transparent"
     app
   >
     <a
@@ -39,7 +41,7 @@
 <script setup lang="ts">
   const items = [
     {
-      title: 'Vuetify Documentation',
+      title: 'Made with Vuetify',
       icon: `$vuetify`,
       href: 'https://vuetifyjs.com/',
     },
