@@ -10,6 +10,7 @@ declare module 'vue' {
     AppBar: typeof import('./components/AppBar.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppMenuHeader: typeof import('./components/AppMenuHeader.vue')['default']
+    AppMenuPopup: typeof import('./components/AppMenuPopup.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Login: typeof import('./components/forms/login.vue')['default']
     Register: typeof import('./components/forms/register.vue')['default']

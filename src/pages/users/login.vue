@@ -1,100 +1,124 @@
-
 <script lang='ts' setup>
 
   import formLogin from '@/components/forms/login.vue'
+  import formRegister from '@/components/forms/register.vue'
+  import { useDisplay } from 'vuetify'
+
+  const { mobile } = useDisplay()
+
+  const tab = ref(null)
+
+  onMounted(() =>{
+    console.log(mobile.value)
+  })
 
 </script>
 
 <template>
 
-  <v-container
-    fluid
-    class='pa-0'
-    d-flex
-  >
-    <v-row
-      class='ma-0'
-    >
-      <v-col
-        cols='3'
-        class='
-          pa-0
-        '
-        offset=""
-        align-self="center"
-      >
+  <v-container fluid class='pa-0' d-flex>
+    <v-row class='ma-0'>
 
-          <div 
-            class='
-              d-flex
-              align-center
-              justify-center
-              form-container
-            '
-          >
-            <v-card 
-            title='Card title'
-            max-width='344'
-            width='344'
-            class='pa-4'
-            flat
-            rounded="false"
-            >
+      <v-col cols xl='4' lg='4' md='6' sm='false' xs='false' class='pa-0' style='background-image: url(https://images3.alphacoders.com/137/1372107.jpeg);'>
 
-              <formLogin />
-            </v-card>
-            
-          </div>
       </v-col>
-      <v-col
-        cols='9'
-        class='
-          pa-0
-        '
-      >
-        <div
-          class='info-container-bg'
-        />
+
+      <v-col cols xl='8' lg='8' md='6' sm='12' xs='12' class='pa-0' align-self='center'>
+
         <v-layout>
           <AppBar />
 
+          <v-main class='d-flex align-start justify-center' style='height: 100vh;'>
+
+            <v-container class='d-flex align-start fill-height' fluid v-if='!mobile' > <!-- Desktop -->
+              <v-row>
+                <v-col cols xl='8' lg='10' class='
+                      offset-xl-2
+                      offset-lg-1
+                    '>
+                  <div class='logo-image' />
+                </v-col>
+
+                <v-col cols xl='4' lg='5' class='
+                      d-flex 
+                      justify-center 
+                      align-start
+                      offset-xl-2
+                      offset-lg-1
+                    '>
+                  <v-card title='Log in' max-width='400' width='400' class='pa-4' flat rounded='false'>
+
+                    <formLogin />
+                  </v-card>
+                </v-col>
+                <v-col cols xl='4' lg='5' class='
+                      d-flex 
+                      justify-center
+                    '>
+                  <v-card title='Sign in' max-width='400' width='400' class='pa-4' flat rounded='false'>
+
+                    <formRegister />
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+
+            <v-container class='d-flex align-start fill-height' fluid v-if='mobile'> <!-- Mobile -->
+              <v-row >
+                <v-col cols='12'>
+                  <div class='logo-image' />
+                </v-col>
+                <v-col cols='12'>
+                  <v-card>
+                    <v-tabs
+                      v-model="tab"
+                      bg-color="primary"
+                      fixed-tabs
+                    >
+                      <v-tab value="one">Log In</v-tab>
+                      <v-tab value="two">Sign In</v-tab>
+                    </v-tabs>
+
+                    <v-card-text>
+                      <v-tabs-window v-model="tab">
+                      <v-tabs-window-item value="one">
+                        <formLogin />
+                      </v-tabs-window-item>
+
+                      <v-tabs-window-item value="two">
+                        <formRegister />
+                      </v-tabs-window-item>
+                      
+                      </v-tabs-window>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+
+              </v-row>
+
+            </v-container>
 
 
-            <!--div
-              style="
-                height: 100%;
-                width: 100%;
-              "
-            >
-              <div
-                class='
-                  info-container
-                '
-              >
-                <h1>HOLAS</h1>
-              </div>
-            </div-->
-
-            <v-main class="d-flex align-center justify-center" style="height: 100vh;">
-            Main Content
-            </v-main>
-
+          </v-main>
 
           <AppFooter />
         </v-layout>
+
       </v-col>
+
     </v-row>
   </v-container>
 
 </template>
 
 <style lang='scss'>
-  .form-container{
+  .form-container {
     height: 100vh;
     background-color: aliceblue;
     width: 100%;
   }
-  .info-container-bg{
+
+  .info-container-bg {
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -103,17 +127,24 @@
     background-position: center;
     filter: blur(4px);
   }
-  .info-container{
+
+  .info-container {
     position: relative;
     z-index: 2;
     width: 100%;
     height: 99vh;
   }
+
+  .logo-image {
+    width: 100%;
+    height: 100px;
+    background-color: green;
+  }
 </style>
 
 <route lang='yaml'>
   meta:
-    layout: users
+    layout: access
   route:
-    path: '/user/login'
+    path: '/access/'
 </route>

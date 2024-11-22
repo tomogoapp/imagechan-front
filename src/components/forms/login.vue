@@ -5,7 +5,7 @@
   import { defineComponent } from 'vue'
   import { VForm } from 'vuetify/components'
   import { useUserStore } from '@/stores/user'
-  import { useField, useForm,Form } from 'vee-validate'
+  import { useField, useForm} from 'vee-validate'
   import { toTypedSchema } from '@vee-validate/zod'
   import * as zod from 'zod'
   import { LoginEntity } from '@/types/form.entity'
@@ -33,7 +33,7 @@
 
   const alertMessage = reactive({
     show:false,
-    type:'',
+    field:'',
     message:'',
 
   })
@@ -68,9 +68,10 @@
         router.push('/')
       }
 
-    }catch(error){
+    }catch(error:any){
       alertMessage.show = true
-      alertMessage.message = `${error}`
+      alertMessage.message = `${error.message}`
+      alertMessage.field = `${error.field}`
       console.log(error)
       //alert(error)
     }
@@ -86,7 +87,7 @@
 
 <template>
   <div>
-    <v-alert v-if='alertMessage.show' :text='alertMessage.message' type="error" class="mb-4"></v-alert>
+    <v-alert v-if='alertMessage.show' :text='`${alertMessage.message},${alertMessage.field}`' type="error" class="mb-4"></v-alert>
     <v-form
       @submit.prevent = 'onSubmit'
     >

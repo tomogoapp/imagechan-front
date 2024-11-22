@@ -79,6 +79,7 @@
 
 <template>
   <div>
+    <v-alert v-if='true' :text='`rrr`' type="error" class="mb-4"></v-alert>
     <v-form
         @submit.prevent = 'onSubmit'
     >
