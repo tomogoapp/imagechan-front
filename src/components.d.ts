@@ -12,10 +12,14 @@ declare module 'vue' {
     AppMenuHeader: typeof import('./components/AppMenuHeader.vue')['default']
     AppMenuPopup: typeof import('./components/AppMenuPopup.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    ImageInput: typeof import('./components/inputs/imageInput.vue')['default']
     Login: typeof import('./components/forms/login.vue')['default']
+    Post: typeof import('./components/forms/post.vue')['default']
     Register: typeof import('./components/forms/register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SwitchInput: typeof import('./components/inputs/switchInput.vue')['default']
+    TextAreaInput: typeof import('./components/inputs/textAreaInput.vue')['default']
     TextInput: typeof import('./components/inputs/textInput.vue')['default']
   }
 }

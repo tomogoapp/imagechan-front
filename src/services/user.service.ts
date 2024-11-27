@@ -4,7 +4,7 @@ import { apolloClient } from '../apolloClient'; // Asegúrate de ajustar la ruta
 import { getUser } from '../graphql/queries/user.graphql'
 import { postRegister } from '../graphql/mutations/user.graphql'
 
-import { Login, ObjectLogin, ObjectRegister, Register } from '@/types'
+import { Login, ObjectLogin, ObjectSign, Sign } from '@/types'
 
 export class UserService {
   async login(user: Login): Promise<ObjectLogin> {
@@ -17,7 +17,7 @@ export class UserService {
       });
 
       if (data && data.login_user) {
-        return data.login_user;
+        return data.login_user
       } else {
         throw new Error('No se recibió una respuesta válida del servidor.')
       }
@@ -26,13 +26,13 @@ export class UserService {
     }
   }
 
-  async registration(user:Register):Promise<ObjectRegister>{
-    const { username,password,confirmPaswword,email } = user
+  async signin(user:Sign):Promise<ObjectSign>{
+    const { username,password,confirmPassword,email } = user
 
     try{
       const { data } = await apolloClient.mutate<{ create_user: ObjectRegister }>({
         mutation: postRegister,
-        variables: { username,password,confirmPaswword,email },
+        variables: { username,password,confirmPassword,email },
       })
 
       if(data && data.create_user){
@@ -45,7 +45,6 @@ export class UserService {
       throw error
     }
 
-    return user
   }
 
 }

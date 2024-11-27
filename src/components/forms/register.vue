@@ -2,14 +2,17 @@
 
     import { toTypedSchema } from '@vee-validate/zod'
     import{ defineComponent } from 'vue'
-    import type { RegisterEntity } from '@/types'
+    import type { SignEntity } from '@/types'
     import * as zod from 'zod'
     import { useField, useForm } from 'vee-validate'
     import TextInput from '../inputs/textInput.vue'
+    import { useUserStore } from '@/stores/user'
 
     defineComponent({
         name: 'formRegister'
     })
+
+    const userStore = useUserStore()
 
     const form = reactive({
         username:{
@@ -61,7 +64,7 @@
         })
     )
 
-    const {handleSubmit} = useForm<RegisterEntity>({
+    const {handleSubmit} = useForm<SignEntity>({
         validationSchema
     })
 
@@ -70,7 +73,24 @@
     const { value:password, errorMessage:errorPassword  } = useField('password')
     const { value:confirmPassword, errorMessage:errorConfirmPassword  } = useField('confirmPassword')
 
-    const onSubmit = handleSubmit ( async(value) => {
+    const onSubmit = handleSubmit ( async(values) => {
+
+        try {
+
+            const { username,email,password,confirmPassword } = values
+            const result = await userStore.post_sign({username,password,email,confirmPassword})
+
+            if (result.message) {
+                alert(result.message)
+            }
+
+        } catch(error:any) {
+            //alertMessage.show = true
+            //alertMessage.message = `${error.message}`
+            //alertMessage.field = `${error.field}`
+            console.log(error)
+            //alert(error)
+        }
 
     })
 

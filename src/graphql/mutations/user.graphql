@@ -1,8 +1,8 @@
 mutation postRegister (
-    $username: string,
-    $email: string,
-    $password: string,
-    $confirmPassword: string
+    $username: String!,
+    $email: String!,
+    $password: String!,
+    $confirmPassword: String!
 ){
     create_user(
         username: $username,

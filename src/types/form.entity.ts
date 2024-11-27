@@ -4,7 +4,7 @@ export interface LoginEntity {
     rememberMe?: boolean
 }
 
-export interface RegisterEntity {
+export interface SignEntity {
     username: string,
     email: string,
     password: string,

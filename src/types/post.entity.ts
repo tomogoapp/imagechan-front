@@ -17,6 +17,18 @@ export interface Post {
     createdBy: CreatedBy
     created_at: string
     updated_at: string
-    deleted_at?: string
+    deleted_at: string
 }
+
+
+// export interface PostForm {
+//     id: string
+//     title: string
+//     content: string
+//     anonPost: boolean
+//     createdBy?: CreatedBy
+//     created_at?: string
+//     updated_at?: string
+//     deleted_at?: string
+// }
   

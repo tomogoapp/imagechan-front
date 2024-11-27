@@ -5,16 +5,13 @@ export interface Login {
 }
 
 export interface ObjectLogin {
-    token: string
+    success: boolean
     message: string
     user: User
 }
 
-export interface ObjectRegister {
-    username: string,
-    email: string,
-    password: string,
-    confirmPaswword: string,
+export interface ObjectSign {
+    message?: string
 }
 
 export interface User {
@@ -23,11 +20,11 @@ export interface User {
     email: string
 }
 
-export interface Register {
+export interface Sign {
     username: string,
     email: string,
     password: string,
-    confirmPaswword: string, 
+    confirmPassword: string, 
 }
 
 export interface User {

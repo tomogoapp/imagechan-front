@@ -9,3 +9,12 @@ export interface textInput {
     prependIcon?: string
     appendIcon?: string
 }
+
+export interface TextAreaField {
+    name: string
+    label: string
+    variant_input?: string
+    placeholder?: string
+    error_message?: string
+    prepend_icon?: string
+}

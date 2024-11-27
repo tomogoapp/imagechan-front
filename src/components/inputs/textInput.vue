@@ -10,11 +10,31 @@
 
     const props = defineProps<textInput>()
 
+    const typeIcon = ref('')
+    const typeText = ref(props.type)
+
     const emit = defineEmits(['update:modelValue'])
 
     function updateValue(value:any) {
      emit('update:modelValue', value)
     }
+
+    onMounted(() =>{
+    if(props.type === 'password') {
+      typeIcon.value = 'mdi-eye'
+      typeText.value = 'password'
+    }
+  })
+
+  function showPassword () {
+    if(typeText.value === 'password') {
+      typeIcon.value = 'mdi-eye-off'
+      typeText.value = 'text'
+    }else{
+      typeIcon.value = 'mdi-eye'
+      typeText.value = 'password'
+    }
+  }
 
 
 </script>
@@ -24,11 +44,17 @@
     <v-text-field
         v-on:input = 'updateValue($event.target.value)'
         :label = 'label'
-        :type = 'type'
+        :type = 'typeText'
         :name = 'name'
+
+        :append-inner-icon = typeIcon
+        :on-click:append-inner="showPassword"
+
         :error-messages='error_message'
         variant = 'outlined'
         required
+
+      
     />
   </div>
 </template>

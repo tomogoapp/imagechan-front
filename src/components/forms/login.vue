@@ -63,9 +63,11 @@
       const { username,password } = values
       const result = await userStore.post_login({username:username,password:password})
 
-      if (result.token) {
+      if (result.success) {
         alert(result.message)
-        router.push('/')
+        router.push('/channel')
+      } else {
+        alert('Error en el inicio de sesión')
       }
 
     }catch(error:any){
