@@ -1,12 +1,26 @@
 <template>
     <div>
-      <v-card
-        class="mx-auto my-8 pa-5"
-        elevation="16"
-        max-width="500"
+
+      <Dialog
+        :modelValue="activeDialog"
+        @update:modelValue="$event => (activeDialog = $event)"
+        :button="button"
       >
-        <Post />
-      </v-card>
+        <v-card
+          class="mx-auto my-8 pa-5"
+          elevation="16"
+          max-width="500"
+          width="500"
+        >
+          <Post
+            @showSnackbar="showSnackbar"
+            @hideDialog="hideDialog"
+          ></Post>
+        </v-card>
+
+      </Dialog>
+
+
       <h1>Lista de Posts</h1>
 
       <div v-if="loading">Cargando...</div>
@@ -23,39 +37,59 @@
     </div>
   </template>
   
-<script lang="ts">
-  import { defineComponent, computed } from 'vue'
+<script lang="ts" setup>
+  import { computed } from 'vue'
   import { useQuery } from '@vue/apollo-composable'
   import type { Post } from '@/types'
   import GetPosts from '@/graphql/queries/post.graphql'
   //import FormPost from '@/components/forms/post.vue'
   
   interface QueryResult {
-    posts: Post[];
+    posts: Post[]
   }
-  
-  export default defineComponent({
-    name: 'TestGraphQL',
-    setup() {
-      // Ejecuta la consulta y desestructura las propiedades necesarias
-      const { result, loading, error } = useQuery<QueryResult>(GetPosts);
-  
-      // Computed property para extraer los datos
-      const posts = computed(() => result.value?.posts ?? []);
-  
-      // Función para formatear fechas
-      const formatDate = (dateStr: string) => {
-        return new Date(dateStr).toLocaleString();
-      };
-  
-      return {
-        posts,
-        loading,
-        error,
-        formatDate,
-      };
-    },
-  });
+
+  // Ejecuta la consulta y desestructura las propiedades necesarias
+  const { result, loading, error } = useQuery<QueryResult>(GetPosts)
+
+  // Computed property para extraer los datos
+  const posts = computed(() => result.value?.posts ?? [])
+
+  // Función para formatear fechas
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleString();
+  }
+
+
+  const overlay = ref(true)
+
+  const activeDialog = ref(false)
+
+  const button = ref({
+    caption:'CREATE POST'
+  })
+
+  onBeforeMount(() => {
+    overlay.value = true
+  })
+
+  const snackbarMessage = ref('')
+  const snackbarColor = ref('success')
+  const isSnackbarActive = ref(false)
+
+  const showSnackbar = ({message,color} : {message: string, color:string}) => {
+    snackbarMessage.value = message
+    snackbarColor.value = color
+    isSnackbarActive.value = true
+    setTimeout(() => {
+      isSnackbarActive.value = false
+    }, 2000)
+  }
+
+  function hideDialog(){
+    activeDialog.value = false
+  }
+
+
 </script>
   
   <style scoped>

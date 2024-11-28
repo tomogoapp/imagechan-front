@@ -46,7 +46,7 @@
         :label = 'label'
         :type = 'typeText'
         :name = 'name'
-
+        dense
         :append-inner-icon = typeIcon
         :on-click:append-inner="showPassword"
 

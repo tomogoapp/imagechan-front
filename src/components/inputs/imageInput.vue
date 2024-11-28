@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
   import { ref } from 'vue';
 
@@ -38,15 +37,20 @@
 
 <template>
   <div>
-    <!-- Imagen clicable -->
-
-    <v-img
-      max-height='400'
-      cover
-      :src='imageUrl || "https://via.placeholder.com/150"'
-      @click='triggerFileInput'
-      alt='Image preview'
-    ></v-img>
+    <!-- Imagen con scroll virtual -->
+    <div 
+      class="image-container"
+      @click="triggerFileInput"
+    >
+      <img
+        v-if="imageUrl"
+        :src="imageUrl"
+        alt="Image preview"
+      />
+      <div v-else class="placeholder">
+        Click to add an image
+      </div>
+    </div>
 
     <!-- Input de archivo oculto -->
     <input
@@ -57,3 +61,32 @@
     />
   </div>
 </template>
+
+<style scoped>
+.image-container {
+  width: 100%; /* Ajusta el ancho según sea necesario */
+  height: 300px; /* Altura fija para la imagen desplazable */
+  overflow: auto; /* Habilita el desplazamiento solo dentro del contenedor */
+  position: relative; /* Asegura que el contenedor esté posicionado correctamente */
+  border: 1px solid #ccc; /* Opcional: para visualizar el contenedor */
+  cursor: pointer; /* Para dar una pista visual al usuario */
+}
+
+.image-container img {
+  width: 100%; /* Escala la imagen al ancho del contenedor */
+  height: auto; /* Mantiene las proporciones */
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #888;
+  font-size: 16px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border: 1px dashed #aaa;
+}
+</style>

@@ -1,0 +1,1 @@
+export type { DialogEntity } from './dialog.entity'

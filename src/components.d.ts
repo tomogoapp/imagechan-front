@@ -11,6 +11,7 @@ declare module 'vue' {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppMenuHeader: typeof import('./components/AppMenuHeader.vue')['default']
     AppMenuPopup: typeof import('./components/AppMenuPopup.vue')['default']
+    Dialog: typeof import('./components/common/dialog.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     ImageInput: typeof import('./components/inputs/imageInput.vue')['default']
     Login: typeof import('./components/forms/login.vue')['default']
