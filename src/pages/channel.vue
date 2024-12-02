@@ -5,6 +5,7 @@
         :modelValue="activeDialog"
         @update:modelValue="$event => (activeDialog = $event)"
         :button="button"
+        v-auth:hide
       >
         <v-card
           class="mx-auto my-8 pa-5"
@@ -21,7 +22,7 @@
       </Dialog>
 
 
-      <h1>Lista de Posts</h1>
+      <h1 v-auth:hide>Lista de Posts</h1>
 
       <div v-if="loading">Cargando...</div>
       <div v-else-if="error">Error: {{ error.message }}</div>
