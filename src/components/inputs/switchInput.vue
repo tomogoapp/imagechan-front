@@ -1,9 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  modelValue: boolean; // Valor del switch
+  name: string; // Nombre del campo
+  label?: string; // Etiqueta opcional
+}>();
+
+const emit = defineEmits(["update:modelValue"]);
+
+function updateValue(value: boolean) {
+  emit("update:modelValue", value); // Emitir el evento al cambiar el valor
+}
+</script>
 
 <template>
   <div class="flex">
-    <div class="text-subtitle-1 text-medium-emphasis">Anon mode:</div>
-    <v-switch label="off"></v-switch>
+    <v-switch
+      :model-value="props.modelValue"
+      :name="props.name"
+      :label="props.label || ''"
+      @update:modelValue="emit('update:modelValue', $event)"
+      color="primary"
+    ></v-switch>
+
   </div>
 </template>
 

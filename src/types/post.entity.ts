@@ -13,11 +13,20 @@ export interface Post {
     id: string
     title: string
     content: string
+    image: string | null
     anonPost: boolean
-    createdBy: CreatedBy
-    created_at: string
-    updated_at: string
-    deleted_at: string
+    createdBy: CreatedBy | null
+    created_at?: string
+    updated_at?: string
+    deleted_at?: string
+    message?: string | undefined
+}
+
+export interface InputPost {
+    title: string,
+    content: string,
+    anonPost: boolean,
+    image?: any
 }
 
 

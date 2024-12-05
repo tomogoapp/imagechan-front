@@ -1,9 +1,10 @@
 <script setup lang="ts">
   import { toTypedSchema } from '@vee-validate/zod'
   import * as zod from 'zod'
-  //import { usePostStore } from '@/store'
+  import { usePostStore } from '@/stores/post'
   import type { Post } from '@/types'
-  import { useField, useForm } from 'vee-validate';
+  import { useField, useForm } from 'vee-validate'
+
 
   const emit = defineEmits(['showSnackbar','hideDialog'])
 
@@ -17,6 +18,12 @@
       name:'content',
       label:'Comment',
       placeholder:'Write here...'
+    },
+    anonPost:{
+      name:'anonPost'
+    },
+    image: {
+      name:'image'
     }
   })
 
@@ -28,7 +35,8 @@
       }),
       content: zod.string({
         required_error:'content - Campo no puede estar vacio'
-      })
+      }),
+      image: zod.any().nullable(), // Campo opcional
     })
 
   )
@@ -38,29 +46,43 @@
   })  
 
   const { value: title } = useField('title')
-  const { value: content } = useField('content') 
+  const { value: content } = useField('content')
+  const { value: anonPost } = useField<boolean>('anonPost')
+  const image = ref<File | null>(null);
+  
 
-  //const post = usePostStore()
+  anonPost.value = false; // Valor inicial
+  
+
+  const post = usePostStore()
 
   const onSubmit = handleSubmit(async values => {
 
-    // try {
+    try {
 
-    //   const { title, content } = values
-    //   const result = await post.createPost({title,content})
+      const { title, content } = values
+      const result = await post.create_post({
+        title,// Si también usas un Ref para el título
+        content, // Si también usas un Ref para el contenido
+        anonPost: anonPost.value, // Extraer el valor booleano del Ref
+        image: image.value instanceof File ? image.value : null,
+      })
 
-    //   if (result) {
-    //     emit('showSnackbar', {
-    //       message: result.message, 
-    //       color: result.success ?'success' : 'error'
-    //     })
+      if (result) {
+        emit('showSnackbar', {
+          //message: result.message, 
+          //color: result.success ?'success' : 'error'
+          message: 'success', 
+          color: 'success'
+        })
 
-    //     emit('hideDialog')
-    //   } 
+        emit('hideDialog')
+      } 
 
-    // } catch(error) {
-    //   console.log(error)
-    // }
+    } catch(error) {
+      console.log(error)
+    }
+
   });
 
 </script>
@@ -94,8 +116,9 @@
       <v-divider />
       <div class="d-flex flex-column">
 
-        <SwitchInput 
-      
+        <SwitchInput
+          :name="form.anonPost.name"
+          v-model="anonPost"
         />
 
         <v-btn

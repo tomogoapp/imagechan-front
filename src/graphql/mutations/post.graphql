@@ -1,3 +1,17 @@
 mutation DeletePost($id:String!){
     deletePost(id:$id)
 }
+
+mutation CreatePost($createPostInput: CreatePostDto!,$image:Upload) {
+  createPost(createPostInput: $createPostInput,image:$image) {
+    id
+    title
+    content
+    anonPost
+    image
+    createdBy {
+      id
+      username
+    }
+  }
+}
