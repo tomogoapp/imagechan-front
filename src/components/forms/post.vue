@@ -50,14 +50,12 @@
   const { value: anonPost } = useField<boolean>('anonPost')
   const image = ref<File | null>(null);
   
-
   anonPost.value = false; // Valor inicial
   
-
   const post = usePostStore()
 
   const onSubmit = handleSubmit(async values => {
-
+    console.log('form ---> ',image)
     try {
 
       const { title, content } = values
@@ -100,6 +98,8 @@
       />
 
       <ImageInput
+        v-model="image"
+        :name='form.image.name'
       />
 
       <TextAreaInput

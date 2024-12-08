@@ -28,8 +28,7 @@
       scrollable
     >
       <template v-slot:activator="{ props: activatorProps }">
-        {{  activeDialog  }}
-        <v-btn v-bind="activatorProps">
+        <v-btn v-bind="activatorProps" color="primary" block tonal rounded="0" >
           {{ button.caption }}
         </v-btn>
       </template>

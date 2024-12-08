@@ -53,7 +53,7 @@ export default defineConfig({
         }],
       },
     }),
-    graphqlLoader()
+    graphqlLoader(),
   ],
   define: { 'process.env': {} },
   resolve: {

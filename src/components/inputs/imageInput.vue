@@ -1,8 +1,12 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ImageInput } from '@/types';
+import { ref } from 'vue';
 
   const image = ref<File | null>(null);
   const imageUrl = ref<string | null>('');
+
+  const props = defineProps<ImageInput>()
+  const emit = defineEmits(['update:modelValue']);
 
   const fileInput = ref<HTMLInputElement | null>(null);
 
@@ -25,6 +29,7 @@
     }
 
     image.value = target.files[0];
+    emit('update:modelValue', image.value); // Emite el archivo al padre
     createImage(image.value);
   }
 
@@ -54,6 +59,7 @@
 
     <!-- Input de archivo oculto -->
     <input
+      :name="props.name"
       type="file"
       ref="fileInput"
       @change="onFileChange"

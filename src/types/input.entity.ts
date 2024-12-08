@@ -19,3 +19,7 @@ export interface TextAreaField {
     prepend_icon?: string
 }
 
+export interface ImageInput {
+    name: string,
+}
+
