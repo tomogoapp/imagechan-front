@@ -89,6 +89,7 @@
   <div>
     <v-form @submit.prevent="onSubmit"> 
       <TextInput
+        v-no-emoji
         v-on="title"
         :name='form.title.name'
         :label='form.title.label'

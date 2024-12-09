@@ -12,9 +12,10 @@ import App from './App.vue'
 
 // Composables
 import { createApp } from 'vue'
-import { DefaultApolloClient } from '@vue/apollo-composable';
-import { apolloClient } from './apolloClient';
-import authDirective from './directives/v-auth';
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import { apolloClient } from './apolloClient'
+import authDirective from './directives/v-auth'
+import noEmoji from './directives/v-no-emoji'
 
 const app = createApp(App)
 
@@ -22,6 +23,7 @@ const app = createApp(App)
 app.provide(DefaultApolloClient, apolloClient)
 
 app.directive('auth', authDirective)
+app.directive("no-emoji", noEmoji)
 
 registerPlugins(app)
 

@@ -34,7 +34,10 @@
             <v-col
                 cols="6 d-flex justify-start align-center"
             >
-                <p><v-avatar  rounded="0" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s"></v-avatar> <b>{{ createdBy?.username === undefined ? 'Anonymous' : createdBy?.username }}</b> <span style="color:green;"> ● Admin</span></p>
+                <p>
+                    <v-avatar class="mr-2" v-if="createdBy?.username !== undefined" rounded="0" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s"></v-avatar>
+                    <v-avatar class="mr-2" v-else rounded="0" color="red"><span class="text-h5">A</span></v-avatar> 
+                    <b>{{ createdBy?.username === undefined ? 'Anonymous' : createdBy?.username }}</b> <!--span style="color:green;"> ● Admin</span --></p>
             </v-col>
             <v-col
                 cols="6 d-flex justify-end align-center"
