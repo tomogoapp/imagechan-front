@@ -1,18 +1,19 @@
 <script lang="ts" setup>
-
+//src="https://static.zerochan.net/Lum.1024.3811583.webp"
 </script>
 
 
 <template>
   <div>
     <v-card
-        max-width="400"
+        width="400"
         rounded="0"
     >
         <v-img
-            src="https://c4.wallpaperflare.com/wallpaper/908/34/383/lofi-digital-anthro-hd-wallpaper-preview.jpg"
+            src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
             cover
             height="100"
+            aspect-ratio="16/9"
         >
             <v-avatar
                 color="grey"

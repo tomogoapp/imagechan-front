@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Adcard: typeof import('./components/common/adcard.vue')['default']
     AppBar: typeof import('./components/AppBar.vue')['default']
+    Appbarmenu: typeof import('./components/common/appbarmenu.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppMenuHeader: typeof import('./components/AppMenuHeader.vue')['default']
     AppMenuPopup: typeof import('./components/AppMenuPopup.vue')['default']
@@ -27,5 +28,6 @@ declare module 'vue' {
     TextAreaInput: typeof import('./components/inputs/textAreaInput.vue')['default']
     TextInput: typeof import('./components/inputs/textInput.vue')['default']
     Usercard: typeof import('./components/common/usercard.vue')['default']
+    Userinfo: typeof import('./components/common/userinfo.vue')['default']
   }
 }

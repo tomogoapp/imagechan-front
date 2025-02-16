@@ -1,15 +1,28 @@
 <script lang="ts" setup>
+import { Replies } from '@/types';
+
+
+  const { id,numberPost,content,created_at } = defineProps<Replies>()
 
   const imgDefaultWide = ref<number | string >(300)
 
   const imgFullWide = () => {
     imgDefaultWide.value = imgDefaultWide.value === 300 ? "100%" : 300;
-  };
+  }
+
+  const x = content ?? ""
+  const formattedContent = computed(() => {
+    return x
+    .split("\n")
+    .map(line => line.startsWith(">") ? `<span class="greentext">${line}</span>` : line)
+    .join("<br>")
+  })
+
 </script>
 
 <template>
   <div>
-    <v-card class="ma-2 pa-2" color="grey-darken-3" rounded="0" flat>
+    <v-card class="ma-2 pa-2" color="grey-darken-3" rounded="0" flat :id="numberPost">
       <v-row>
         <v-col cols="8">
           <v-avatar
@@ -19,28 +32,26 @@
           <b> Peasuke</b>
         </v-col>
         <v-col cols="4" class="d-flex justify-end align-center">
-          #67689 >>> #67454
+          #{{ numberPost }}
         </v-col>
         <v-col cols class="mt-0 pt-0">
-          
+          <p class="text-wrap mx-0 my-2" style="font-size: 0.9rem;">
             <!-- Contenedor flotante para la imagen -->
-            <v-img
+            <!-- <v-img
                 src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
                 alt="Imagen ejemplo"
                 :max-width="imgDefaultWide"
                 class="wrapped-img"
                 @click="imgFullWide"
                 style= "cursor: pointer;"
-            />{{ imgDefaultWide }}
+            /> -->
+            <img 
+              src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
+              alt="Imagen ejemplo"
+              class="image-wrapped"
+            />
             <!-- Texto que envuelve a la imagen -->
-            <p class="text-wrap mx-0 my-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis turpis
-              vitae ex efficitur, quis dapibus mi fermentum. Proin ipsum lectus, lacinia sed ex et,
-              blandit sollicitudin odio. Morbi commodo felis in cursus blandit. Nullam mi sem,
-              maximus ut mollis non, laoreet egestas nibh. Praesent dignissim, leo in facilisis
-              ultrices, enim eros finibus felis, a elementum metus ante sit amet ante. Praesent
-              tristique dolor ac urna vehicula, vel feugiat mauris gravida. Integer condimentum
-              eget.
+              {{ formattedContent }}
             </p>
           
         </v-col>
@@ -78,4 +89,9 @@
 .text-wrap {
   overflow: hidden; /* Evita que el texto se solape */
 }
+
+::v-deep(.greentext) {
+  color: #78c850;
+}
+
 </style>

@@ -5,6 +5,10 @@ mutation CreatePost($createPostInput: CreatePostDto!,$image:Upload) {
     content
     anonPost
     image
+    channel{
+        id
+        slug
+    }
     createdBy {
       id
       username

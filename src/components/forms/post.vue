@@ -11,7 +11,7 @@
   const form  = reactive({
     title:{
       name:'title',
-      label:'Title',
+      label:'Title !!!!!',
       type: 'text'
     },
     content:{
@@ -63,6 +63,7 @@
         title,// Si también usas un Ref para el título
         content, // Si también usas un Ref para el contenido
         anonPost: anonPost.value, // Extraer el valor booleano del Ref
+        channel:'ksm',
         image: image.value instanceof File ? image.value : null,
       })
 

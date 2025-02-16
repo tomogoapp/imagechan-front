@@ -10,13 +10,15 @@ export const usePostStore = defineStore('post', {
   }),
   actions:{
     async create_post(data:InputPost):Promise<Post> {
-        const { id,title,content,anonPost,image,createdBy } = await createPost(data)
+        console.log("DATA!!!!",data)
+        const { id,title,content,anonPost,image,createdBy,numberPost } = await createPost(data)
         try{
             return {
                 id,
                 title,
                 content,
                 anonPost,
+                numberPost,
                 image,
                 createdBy: createdBy
             }

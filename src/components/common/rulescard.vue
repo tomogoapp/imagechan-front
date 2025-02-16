@@ -42,7 +42,7 @@
         <span class="font-weight-black">/a/ - Anime</span>
         </template>
 
-        <v-card-text class="bg-surface-light pa-10">
+        <v-card-text class="bg-surface-light py-5 px-10">
         
             <h3>Please read the rules carefully:</h3>
             <ul>

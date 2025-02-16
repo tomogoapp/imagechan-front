@@ -6,6 +6,7 @@ query GetPosts {
         content
         anonPost
         image
+        numberPost
         createdBy {
             username
             id

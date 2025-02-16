@@ -4,6 +4,7 @@ query GetPosts {
         id
         title
         content
+        numberPost
         anonPost
         image
         createdBy {

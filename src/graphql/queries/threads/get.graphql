@@ -1,0 +1,23 @@
+query GetThreads {
+  threads {
+    id
+    created_at
+    updated_at
+    post {
+      id
+      title
+      content
+      image
+      numberPost
+      createdBy{
+        username
+      }
+    }
+    reply {
+      id
+      numberPost
+      content
+      created_at
+    }
+  }
+}

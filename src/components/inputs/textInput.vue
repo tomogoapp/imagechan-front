@@ -46,15 +46,12 @@
         :label = 'label'
         :type = 'typeText'
         :name = 'name'
-        dense
+        density="compact"
         :append-inner-icon = typeIcon
         :on-click:append-inner="showPassword"
-
         :error-messages='error_message'
         variant = 'outlined'
         required
-
-      
     />
   </div>
 </template>
