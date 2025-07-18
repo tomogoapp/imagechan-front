@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
   import { toTypedSchema } from '@vee-validate/zod'
   import * as zod from 'zod'
   import { usePostStore } from '@/stores/post'
@@ -9,11 +9,6 @@
   const emit = defineEmits(['showSnackbar','hideDialog'])
 
   const form  = reactive({
-    title:{
-      name:'title',
-      label:'Title !!!!!',
-      type: 'text'
-    },
     content:{
       name:'content',
       label:'Comment',
@@ -30,9 +25,6 @@
   const validationSchema = toTypedSchema(
     zod
     .object({
-      title: zod.string({
-        required_error:'title - Campo no puede estar vacio'
-      }),
       content: zod.string({
         required_error:'content - Campo no puede estar vacio'
       }),
@@ -45,7 +37,6 @@
     validationSchema
   })  
 
-  const { value: title } = useField('title')
   const { value: content } = useField('content')
   const { value: anonPost } = useField<boolean>('anonPost')
   const image = ref<File | null>(null);
@@ -58,12 +49,11 @@
     console.log('form ---> ',image)
     try {
 
-      const { title, content } = values
+      const { content } = values
       const result = await post.create_post({
-        title,// Si también usas un Ref para el título
-        content, // Si también usas un Ref para el contenido
-        anonPost: anonPost.value, // Extraer el valor booleano del Ref
-        channel:'con',
+        content, 
+        anonPost: anonPost.value,
+        channel:'ksm',
         image: image.value instanceof File ? image.value : null,
       })
 
@@ -89,15 +79,6 @@
 <template>
   <div>
     <v-form @submit.prevent="onSubmit"> 
-      <TextInput
-        v-no-emoji
-        v-on="title"
-        :name='form.title.name'
-        :label='form.title.label'
-        :type='form.title.type'
-        :error_message='errors.title'
-        @update:modelValue="title = $event"
-      />
 
       <ImageInput
         v-model="image"
@@ -113,8 +94,6 @@
         @update:modelValue="content = $event"
       />
 
-
-
       <v-divider />
       <div class="d-flex flex-column">
 
@@ -129,14 +108,15 @@
           type="submit"
           block
         >
-          POST
+          CREATE
         </v-btn>
+        
       </div>
     </v-form>
   </div>
 </template>
 
-<style scoped>
+<style>
   .v-text-field .v-input__details {
       padding-inline: 0px;
   }

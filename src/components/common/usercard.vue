@@ -10,7 +10,7 @@
         rounded="0"
     >
         <v-img
-            src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
+            src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65 https://fastly.picsum.photos/id/40/500/300.jpg?hmac=uBM7mpMBhH4DKROQtJLVAeuX-V9LldirxJ-m3uju5H8"
             cover
             height="100"
             aspect-ratio="16/9"
@@ -20,7 +20,7 @@
                 rounded="0"
                 size="100"
             >
-                <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s" cover></v-img>
+                <v-img src="https://fastly.picsum.photos/id/40/500/300.jpg?hmac=uBM7mpMBhH4DKROQtJLVAeuX-V9LldirxJ-m3uju5H8" cover></v-img>
                 <!-- Botón flotante con un ícono de lápiz -->
             </v-avatar>
             <v-list-item

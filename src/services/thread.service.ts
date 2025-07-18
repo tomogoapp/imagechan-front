@@ -1,4 +1,4 @@
-import { apolloClient } from '../apolloClient';
+import apolloClient from '../apolloClient';
 import GetThreads from "../graphql/queries/threads/get.graphql";
 import { Thread } from '@/types';
 

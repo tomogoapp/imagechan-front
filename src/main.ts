@@ -13,7 +13,7 @@ import App from './App.vue'
 // Composables
 import { createApp } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
-import { apolloClient } from './apolloClient'
+import apolloClient  from './apolloClient'
 import authDirective from './directives/v-auth'
 import noEmoji from './directives/v-no-emoji'
 

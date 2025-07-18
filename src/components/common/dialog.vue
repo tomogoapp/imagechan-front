@@ -1,21 +1,19 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
-  import type { DialogEntity } from '@/types/components';
+  import { ref, watch } from 'vue'
+  import type { DialogEntity } from '@/types/components'
 
-  const props = defineProps<DialogEntity>();
-  const emit = defineEmits(['update:modelValue']);
+  const props = defineProps<DialogEntity>()
+  const emit = defineEmits(['update:modelValue'])
 
-  const activeDialog = ref(props.modelValue);
+  const activeDialog = ref(props.modelValue)
 
-  // Observa cambios en la propiedad modelValue para actualizar activeDialog
   watch(() => props.modelValue, (newValue) => {
-    activeDialog.value = newValue;
+    activeDialog.value = newValue
   });
 
-  // Observa cambios en activeDialog para emitir el evento update:modelValue
   watch(activeDialog, (newValue) => {
-    emit('update:modelValue', newValue);
-  });
+    emit('update:modelValue', newValue)
+  })
 
 </script>
 

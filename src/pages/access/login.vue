@@ -19,8 +19,9 @@
   <v-container fluid class='pa-0' d-flex>
     <v-row class='ma-0'>
 
-      <v-col cols xl='4' lg='4' md='6' sm='false' xs='false' class='pa-0' style='background-image: url(https://images3.alphacoders.com/137/1372107.jpeg);'>
-
+      <v-col cols xl='4' lg='4' md='6' sm='false' xs='false' class='pa-0 img-bg' style='background-image: url(https://tourismmedia.italia.it/is/image/mitur/1600X1000_pisa_il_fascino_dell_antica_repubblica_marinara_hero-2);'>
+        <!-- https://fastly.picsum.photos/id/404/536/354.jpg?hmac=BVbZ4ixcfdCrcGHOT7Zg6As4TTJ9YlHvB5UhVOv0Wvw -->
+        <!-- https://images3.alphacoders.com/137/1372107.jpeg -->
       </v-col>
 
       <v-col cols xl='8' lg='8' md='6' sm='12' xs='12' class='pa-0' align-self='center'>
@@ -124,7 +125,12 @@
     height: 100vh;
     z-index: 1;
     background-image: url(https://images3.alphacoders.com/137/1372107.jpeg);
-    background-position: center;
+    background-size: cover;
+    background-image: url(https://images3.alphacoders.com/137/1372107.jpeg);
+    background-position-x: center;
+    background-position-y: center;
+    background-blend-mode: darken;
+
     filter: blur(4px);
   }
 
@@ -139,6 +145,11 @@
     width: 100%;
     height: 100px;
     background-color: green;
+  }
+  .img-bg {
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
   }
 </style>
 

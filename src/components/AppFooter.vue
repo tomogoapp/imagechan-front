@@ -59,7 +59,7 @@
       class="text-caption text-disabled"
       style="position: absolute; right: 16px;"
     >
-      &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">YUZUBA, LLC</span>
+      &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Christian Ruiz</span>
       
     </div>
   </v-footer>

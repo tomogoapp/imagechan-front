@@ -8,10 +8,13 @@
           <div v-else-if="error">Error: {{ error.message }}</div>
 
           <div class="d-flex">
-            <!-- <div class="mr-3 sticky-div">
-              <Usercard class="mb-3"></Usercard>
-              <Userinfo />
+
+            <!-- <div class="mr-3 sticky-div align-start">
+              <Usercard></Usercard>
+              <Userinfo class="mb-3"/>
+              <Listgrid />
             </div> -->
+
             <div>
               <Postcard
                 v-for="post in threadStore.threads" :key="post.id"
@@ -25,12 +28,14 @@
                 class=" mb-4"
               />
             </div>
+
             <div class="ml-3 sticky-div">
               <div>
                 <Usercard></Usercard>
                 <Userinfo class="mb-3"/>
               </div>
               <Rulescard ></Rulescard>
+
             </div>
           </div>
         </div>
@@ -73,7 +78,7 @@
   <style scoped>
     .sticky-div {
       position: sticky;
-      top: 52px; /* Espacio desde la parte superior */
+      top: 12px; /* Espacio desde la parte superior */
       align-self: start; /* Alinea el sticky correctamente en flexbox */
     }
   </style>

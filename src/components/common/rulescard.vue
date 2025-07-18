@@ -1,32 +1,33 @@
 <script lang="ts" setup>
-    const overlay = ref(true)
 
-    const activeDialog = ref(false)
+  const overlay = ref(true)
 
-    const button = ref({
-        caption:'CREATE POST'
-    })
+  const activeDialog = ref(false)
 
-    onBeforeMount(() => {
-        overlay.value = true
-    })
+  const button = ref({
+      caption:'CREATE POST'
+  })
 
-    function hideDialog(){
-        activeDialog.value = false
-    }
+  onBeforeMount(() => {
+      overlay.value = true
+  })
 
-    const snackbarMessage = ref('')
-    const snackbarColor = ref('success')
-    const isSnackbarActive = ref(false)
+  function hideDialog(){
+      activeDialog.value = false
+  }
 
-    const showSnackbar = ({message,color} : {message: string, color:string}) => {
-        snackbarMessage.value = message
-        snackbarColor.value = color
-        isSnackbarActive.value = true
-        setTimeout(() => {
-            isSnackbarActive.value = false
-        }, 2000)
-    }
+  const snackbarMessage = ref('')
+  const snackbarColor = ref('success')
+  const isSnackbarActive = ref(false)
+
+  const showSnackbar = ({message,color} : {message: string, color:string}) => {
+      snackbarMessage.value = message
+      snackbarColor.value = color
+      isSnackbarActive.value = true
+      setTimeout(() => {
+          isSnackbarActive.value = false
+      }, 2000)
+  }
 
 </script>
 
@@ -60,25 +61,25 @@
             </v-btn -->
 
 
-            <Dialog
-            :modelValue="activeDialog"
-            @update:modelValue="$event => (activeDialog = $event)"
-            :button="button"
-            v-auth:hide
+        <Dialog
+          :modelValue="activeDialog"
+          @update:modelValue="$event => (activeDialog = $event)"
+          :button="button"
+          v-auth:hide
+        >
+          <v-card
+            class="mx-auto my-8 pa-5"
+            elevation="16"
+            max-width="500"
+            width="500"
           >
-            <v-card
-              class="mx-auto my-8 pa-5"
-              elevation="16"
-              max-width="500"
-              width="500"
-            >
-              <Post
-                @showSnackbar="showSnackbar"
-                @hideDialog="hideDialog"
-              ></Post>
-            </v-card>
+            <Post
+              @showSnackbar="showSnackbar"
+              @hideDialog="hideDialog"
+            ></Post>
+          </v-card>
 
-          </Dialog>
+        </Dialog>
         <!--/v-card-actions -->
     </v-card>
   </div>

@@ -2,7 +2,7 @@ import { InputPost, Post } from "@/types"
 import CreatePost from "../graphql/mutations/post/create.graphql"
 
 // import { provideApolloClient } from "@vue/apollo-composable"
-import { apolloClient } from "@/apolloClient"
+import apolloClient from "@/apolloClient"
 
 export class PostService {
   // async createPost(post: InputPost): Promise<Post> {

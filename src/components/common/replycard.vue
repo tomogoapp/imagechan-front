@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { Replies } from '@/types';
-
+  import { Replies } from '@/types';
 
   const { id,numberPost,content,created_at } = defineProps<Replies>()
 
@@ -18,38 +17,80 @@ import { Replies } from '@/types';
     .join("<br>")
   })
 
+  const overlay = ref(true)
+  const activeDialog = ref(false)
+  const button = ref({
+      caption:'Reply'
+  })
+  onBeforeMount(() => {
+      overlay.value = true
+  })
+  function hideDialog(){
+      activeDialog.value = false
+  }
+  const snackbarMessage = ref('')
+  const snackbarColor = ref('success')
+  const isSnackbarActive = ref(false)
+  const showSnackbar = ({message,color} : {message: string, color:string}) => {
+      snackbarMessage.value = message
+      snackbarColor.value = color
+      isSnackbarActive.value = true
+      setTimeout(() => {
+          isSnackbarActive.value = false
+      }, 2000)
+  }
+
 </script>
 
 <template>
   <div>
     <v-card class="ma-2 pa-2" color="grey-darken-3" rounded="0" flat :id="numberPost">
       <v-row>
-        <v-col cols="8">
-          <v-avatar
-            rounded="0"
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s"
-          ></v-avatar>
-          <b> Peasuke</b>
+        <v-col 
+          cols="6"
+          class='d-flex align-center justify-start'
+        >
+
+          <p>
+            <v-avatar class="mr-2" v-if="createdBy?.username !== undefined" rounded="0" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s"></v-avatar>
+            <v-avatar class="mr-2" v-else rounded="0" color="red"><span class="text-h5">A</span></v-avatar> 
+          </p> 
+          <p>
+            <span><b>{{ createdBy?.username === undefined ? 'Anonymous' : createdBy?.username }}</b> <!--span style="color:green;"> ● Admin</span --></span>
+            <br/>
+            <span>
+              <v-chip 
+                variant="text"
+                class="pa-0"
+                size="small"
+                rounded="0"
+              >
+                {{ created_at }}
+              </v-chip>
+            </span>
+          </p>
+
         </v-col>
-        <v-col cols="4" class="d-flex justify-end align-center">
-          #{{ numberPost }}
+        <v-col 
+          cols="6" 
+          class="d-flex justify-end align-center"
+        >
+          <v-chip 
+            color="green"
+            label
+          >
+            #{{ numberPost }}
+          </v-chip>
         </v-col>
         <v-col cols class="mt-0 pt-0">
+
           <p class="text-wrap mx-0 my-2" style="font-size: 0.9rem;">
-            <!-- Contenedor flotante para la imagen -->
-            <!-- <v-img
-                src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
-                alt="Imagen ejemplo"
-                :max-width="imgDefaultWide"
-                class="wrapped-img"
-                @click="imgFullWide"
-                style= "cursor: pointer;"
-            /> -->
             <img 
               src="https://assets.promptbase.com/DALLE_IMAGES%2Fu1Xw9dBsGMbEzcZ853mX8z4hJqk2%2Fresized%2F1713447454654n_w_800x800.webp?alt=media&token=e7e5b10a-f002-4589-98f9-b867f5745c65"
               alt="Imagen ejemplo"
               class="image-wrapped"
             />
+
             <!-- Texto que envuelve a la imagen -->
               {{ formattedContent }}
             </p>
@@ -57,7 +98,27 @@ import { Replies } from '@/types';
         </v-col>
         <v-col cols="4" class="d-flex justify-end offset-8">
           <v-btn color="error" elevation="0" class="mx-1" rounded="0"> Report </v-btn>
-          <v-btn elevation="0" rounded="0"> Reply </v-btn>
+
+
+          <Dialog
+            :modelValue="activeDialog"
+            @update:modelValue="$event => (activeDialog = $event)"
+            :button="button"
+            v-auth:hide
+          >
+            <v-card
+              class="mx-auto my-8 pa-5"
+              elevation="16"
+              max-width="500"
+              width="500"
+            >
+              <Reply
+                @showSnackbar="showSnackbar"
+                @hideDialog="hideDialog"
+              ></Reply>
+            </v-card>
+          </Dialog>
+
         </v-col>
       </v-row>
     </v-card>

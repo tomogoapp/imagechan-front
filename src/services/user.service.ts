@@ -1,8 +1,8 @@
 // src/services/UserService.ts
 
-import { apolloClient } from '../apolloClient'; // Asegúrate de ajustar la ruta
-import { getUser } from '../graphql/queries/user.graphql'
-import { postRegister } from '../graphql/mutations/user.graphql'
+import apolloClient  from '../apolloClient'; // Asegúrate de ajustar la ruta
+import getUser from '../graphql/queries/user/login.graphql'
+import postRegister from '../graphql/mutations//user/signIn.graphql'
 
 import { Login, ObjectLogin, ObjectSign, Sign } from '@/types'
 

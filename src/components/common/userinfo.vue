@@ -16,8 +16,8 @@
         rounded="0"
     >
         <template v-slot:title>
-        <span class="font-weight-black">Peasuke</span>
-        <span class="font-weight-black text-light-green-darken-4"> ● Super</span>
+        <span class="font-weight-black">Chris Ruiz</span>
+        <span class="font-weight-black text-light-green-darken-4"> ⬢ R00T</span>
         </template>
     </v-card>
   </div>

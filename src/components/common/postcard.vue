@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 
     import { Post } from '@/types'
-    import { number } from 'zod';
     const props = defineProps<Post>()
     const show = ref(false)
 
@@ -12,29 +11,61 @@
         .split("\n")
         .map(line => line.startsWith(">") ? `<span class="greentext">${line}</span>` : line)
         .join("<br>");
-    });
+    })
+
+
+    const overlay = ref(true)
+    const activeDialog = ref(false)
+    const button = ref({
+        caption:'Reply'
+    })
+    onBeforeMount(() => {
+        overlay.value = true
+    })
+    function hideDialog(){
+        activeDialog.value = false
+    }
+    const snackbarMessage = ref('')
+    const snackbarColor = ref('success')
+    const isSnackbarActive = ref(false)
+    const showSnackbar = ({message,color} : {message: string, color:string}) => {
+        snackbarMessage.value = message
+        snackbarColor.value = color
+        isSnackbarActive.value = true
+        setTimeout(() => {
+            isSnackbarActive.value = false
+        }, 2000)
+    }
+
 
 </script>
 
 <template>
   <div>
     <v-card
-        max-width="625"
+        max-width="590"
+        max-w-xs max-w-sm-md max-w-md-lg max-w-lg-xl
         rounded="0"
         flat
+        :id="numberPost"
     >
         <v-card-title>
             <v-row>
                 <v-col
-                    cols = '9'
+                    cols = '10'
                 >
                     {{ title }} 
                 </v-col>
                 <v-col
-                    cols = '3'
+                    cols = '2'
                     class="d-flex justify-end"
                 >
-                    #{{ numberPost }}
+                    <v-btn 
+                        icon="mdi-dots-vertical" 
+                        rounded="0" 
+                        variant="text" 
+                        size="x-small"
+                    />
                 </v-col>
             </v-row>
         </v-card-title>
@@ -61,14 +92,33 @@
                 cols="6 d-flex justify-start align-center"
             >
                 <p>
-                    <v-avatar class="mr-2" v-if="createdBy?.username !== undefined" rounded="0" image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwGIoh3qXCUEgg-56J4iJlW8iRAXONERkSpg&s"></v-avatar>
+                    <v-avatar class="mr-2" v-if="createdBy?.username !== undefined" rounded="0" image="https://fastly.picsum.photos/id/40/500/300.jpg?hmac=uBM7mpMBhH4DKROQtJLVAeuX-V9LldirxJ-m3uju5H8"></v-avatar>
                     <v-avatar class="mr-2" v-else rounded="0" color="red"><span class="text-h5">A</span></v-avatar> 
-                    <b>{{ createdBy?.username === undefined ? 'Anonymous' : createdBy?.username }}</b> <!--span style="color:green;"> ● Admin</span --></p>
+                </p> 
+                <p>
+                    <span><b>{{ createdBy?.username === undefined ? 'Anonymous' : 'Chris Ruiz' }}</b> <!--span style="color:green;"> ● Admin</span --></span>
+                    <br/>
+                    <span>
+                        <v-chip 
+                            variant="text"
+                            class="pa-0"
+                            size="small"
+                            rounded="0"
+                        >
+                            {{ created_at }}
+                        </v-chip>
+                    </span>
+                </p>
             </v-col>
             <v-col
                 cols="6 d-flex justify-end align-center"
             >
-                {{ created_at }}
+                <v-chip 
+                    color="green"
+                    label
+                >
+                    #{{ numberPost }}
+                </v-chip>
             </v-col>
         </v-row>
     
@@ -82,10 +132,26 @@
             >
                 Report
             </v-btn>
-            <v-btn >
-                Reply
-            </v-btn>
-            <v-btn icon="mdi-dots-vertical" rounded="0"/>
+
+            <Dialog
+            :modelValue="activeDialog"
+            @update:modelValue="$event => (activeDialog = $event)"
+            :button="button"
+            v-auth:hide
+          >
+            <v-card
+              class="mx-auto my-8 pa-5"
+              elevation="16"
+              max-width="500"
+              width="500"
+            >
+              <Reply
+                @showSnackbar="showSnackbar"
+                @hideDialog="hideDialog"
+              ></Reply>
+            </v-card>
+          </Dialog>
+
         </v-card-actions>
 
         <Replycard

@@ -1,0 +1,13 @@
+query getUser(
+  $username: String!, 
+  $password: String!
+) {
+  login_user(username: $username, password: $password) {
+    success
+    message
+    user {
+      id
+      username
+    }
+  }
+}
