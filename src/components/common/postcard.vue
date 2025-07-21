@@ -43,7 +43,7 @@
 <template>
   <div>
     <v-card
-        max-width="590"
+        width="590"
         max-w-xs max-w-sm-md max-w-md-lg max-w-lg-xl
         rounded="0"
         flat

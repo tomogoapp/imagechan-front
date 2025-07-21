@@ -20,7 +20,7 @@
                 rounded="0"
                 size="100"
             >
-                <v-img src="https://fastly.picsum.photos/id/40/500/300.jpg?hmac=uBM7mpMBhH4DKROQtJLVAeuX-V9LldirxJ-m3uju5H8" cover></v-img>
+                <v-img src="https://pbs.twimg.com/profile_images/1901761773906096128/-ndFHn_b_400x400.jpg" cover></v-img>
                 <!-- Botón flotante con un ícono de lápiz -->
             </v-avatar>
             <v-list-item

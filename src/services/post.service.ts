@@ -53,7 +53,6 @@ export class PostService {
 
   async createPost(post: InputPost): Promise<Post> {
     const { title, content, anonPost, image, channel } = post;
-    console.log("post!!!!", post);
     
     try {
       const result = await apolloClient.mutate({

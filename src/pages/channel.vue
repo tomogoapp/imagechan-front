@@ -15,7 +15,7 @@
               <Listgrid />
             </div> -->
 
-            <div>
+            <div class="flex-grow-1">
               <Postcard
                 v-for="post in threadStore.threads" :key="post.id"
                 :title='post.post.title'
@@ -30,12 +30,11 @@
             </div>
 
             <div class="ml-3 sticky-div">
-              <div>
+              <!-- <div>
                 <Usercard></Usercard>
                 <Userinfo class="mb-3"/>
-              </div>
+              </div> -->
               <Rulescard ></Rulescard>
-
             </div>
           </div>
         </div>
@@ -78,7 +77,7 @@
   <style scoped>
     .sticky-div {
       position: sticky;
-      top: 12px; /* Espacio desde la parte superior */
+      top: 56px; /* Espacio desde la parte superior */
       align-self: start; /* Alinea el sticky correctamente en flexbox */
     }
   </style>
